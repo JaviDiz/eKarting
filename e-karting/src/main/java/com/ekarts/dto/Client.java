@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Client implements Serializable{   
     private int id;
     private String name;
+    private String nif;
     private String surname;
     private String email;
     private String phone;
@@ -17,18 +18,20 @@ public class Client implements Serializable{
 		this.id = id;
 	}
 
-	public Client(int id, String name, String surname, String email, String phone, double balance) {
+	public Client(int id, String name, String nif, String surname, String email, String phone, double balance) {
 		this.id = id;
 		this.name = name;
+		this.nif = nif;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
 		this.balance = balance;
 	}
 
-	public Client(String name, String surname, String email, String phone, double balance) {
+	public Client(String name, String nif, String surname, String email, String phone, double balance) {
 		super();
 		this.name = name;
+		this.nif = nif;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
@@ -81,6 +84,14 @@ public class Client implements Serializable{
 
 	public void setBalance(double balance) {
 		this.balance = balance;
+	}
+	
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 
 	@Override

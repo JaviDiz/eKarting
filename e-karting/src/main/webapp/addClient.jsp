@@ -15,6 +15,10 @@
                         <input type="text" class="form-control" name="nombre" required />
                     </div>
                     <div class="form-group">
+                        <label for="nombre">Nif</label>
+                        <input type="text" class="form-control" name="nif" required />
+                    </div>
+                    <div class="form-group">
                         <label for="apellido">Apellido</label>
                         <input type="text" class="form-control" name="apellido" required />
                     </div>

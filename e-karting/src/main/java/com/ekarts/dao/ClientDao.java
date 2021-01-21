@@ -16,7 +16,7 @@ public class ClientDao {
 	 * 
 	 */
 	public List<Client> listar() {
-		String SQL_SELECT = "SELECT cli_id, cli_name, cli_surname, cli_email, cli_phone, cli_balance " + " FROM client";
+		String SQL_SELECT = "SELECT cli_id, cli_name, cli_nif, cli_surname, cli_email, cli_phone, cli_balance " + " FROM client";
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -30,12 +30,13 @@ public class ClientDao {
 			while (rs.next()) {
 				int id = rs.getInt("cli_id");
 				String name = rs.getString("cli_name");
+				String nif = rs.getString("cli_nif");
 				String surname = rs.getString("cli_surname");
 				String email = rs.getString("cli_email");
 				String phone = rs.getString("cli_phone");
 				double balance = rs.getDouble("cli_balance");
 
-				client = new Client(id, name, surname, email, phone, balance);
+				client = new Client(id, name, nif, surname, email, phone, balance);
 				clients.add(client);
 			}
 		} catch (SQLException ex) {
@@ -53,7 +54,7 @@ public class ClientDao {
 	 * 
 	 */
 	public Client findById(Client client) {
-		String SQL_SELECT_BY_ID = "SELECT cli_id, cli_name, cli_surname, cli_email, cli_phone, cli_balance "
+		String SQL_SELECT_BY_ID = "SELECT cli_id, cli_name, cli_nif, cli_surname, cli_email, cli_phone, cli_balance "
 				+ " FROM client WHERE cli_id = ?";
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -66,12 +67,14 @@ public class ClientDao {
 			rs.absolute(1);// nos posicionamos en el primer registro devuelto
 
 			String name = rs.getString("cli_name");
+			String nif = rs.getString("cli_nif");
 			String surname = rs.getString("cli_surname");
 			String email = rs.getString("cli_email");
 			String phone = rs.getString("cli_phone");
 			double balance = rs.getDouble("cli_balance");
 
 			client.setName(name);
+			client.setNif(nif);
 			client.setSurname(surname);
 			client.setEmail(email);
 			client.setPhone(phone);
@@ -92,8 +95,8 @@ public class ClientDao {
 	 * 
 	 */
 	public int create(Client client) {
-		String SQL_INSERT = "INSERT INTO client(cli_name, cli_surname, cli_email, cli_phone, cli_balance) "
-				+ " VALUES(?, ?, ?, ?, ?)";
+		String SQL_INSERT = "INSERT INTO client(cli_name, cli_nif, cli_surname, cli_email, cli_phone, cli_balance) "
+				+ " VALUES(?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		int rows = 0;
@@ -101,10 +104,11 @@ public class ClientDao {
 			conn = DBConnection.getConnection();
 			stmt = conn.prepareStatement(SQL_INSERT);
 			stmt.setString(1, client.getName());
-			stmt.setString(2, client.getSurname());
-			stmt.setString(3, client.getEmail());
-			stmt.setString(4, client.getPhone());
-			stmt.setDouble(5, client.getBalance());
+			stmt.setString(2, client.getNif());
+			stmt.setString(3, client.getSurname());
+			stmt.setString(4, client.getEmail());
+			stmt.setString(5, client.getPhone());
+			stmt.setDouble(6, client.getBalance());
 
 			rows = stmt.executeUpdate();
 		} catch (SQLException ex) {
@@ -122,7 +126,7 @@ public class ClientDao {
 	 */
 	public int update(Client client) {
 		String SQL_UPDATE = "UPDATE client "
-				+ " SET cli_name=?, cli_surname=?, cli_email=?, cli_phone=?, cli_balance=? WHERE cli_id=?";
+				+ " SET cli_name=?, cli_nif=?, cli_surname=?, cli_email=?, cli_phone=?, cli_balance=? WHERE cli_id=?";
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		int rows = 0;
@@ -131,6 +135,7 @@ public class ClientDao {
 			stmt = conn.prepareStatement(SQL_UPDATE);
 			int i = 1;
 			stmt.setString(i++, client.getName());
+			stmt.setString(i++, client.getNif());
 			stmt.setString(i++, client.getSurname());
 			stmt.setString(i++, client.getEmail());
 			stmt.setString(i++, client.getPhone());

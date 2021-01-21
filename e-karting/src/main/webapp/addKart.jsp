@@ -11,11 +11,11 @@
                 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nombre">Name</label>
+                        <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" name="nombre" required />
                     </div>
                     <div class="form-group">
-                        <label for="desc">Description</label>
+                        <label for="desc">Descripción</label>
                         <input type="text" class="form-control" name="descripcion" required />
                     </div>
                 </div>

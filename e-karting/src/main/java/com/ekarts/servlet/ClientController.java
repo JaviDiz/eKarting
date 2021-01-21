@@ -89,6 +89,7 @@ private static final long serialVersionUID = -7558166539389234332L;
 		
 		// recuperamos los valores del formulario agregarCliente
 		String nombre = request.getParameter("nombre");
+		String nif = request.getParameter("nif");
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
 		String telefono = request.getParameter("telefono");
@@ -99,7 +100,7 @@ private static final long serialVersionUID = -7558166539389234332L;
 		}
 
 		// Creamos el objeto de cliente (modelo)
-		Client cliente = new Client(nombre, apellido, email, telefono, saldo);
+		Client cliente = new Client(nombre, nif, apellido, email, telefono, saldo);
 
 		// Insertamos el nuevo objeto en la base de datos
 		int registrosModificados = new ClientDao().create(cliente);
@@ -117,6 +118,7 @@ private static final long serialVersionUID = -7558166539389234332L;
 		int idCliente = Integer.parseInt(request.getParameter("idClient"));
 		String nombre = request.getParameter("nombre");
 		System.out.println("Nombre:" + nombre);
+		String nif = request.getParameter("nif");
 		
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
@@ -128,7 +130,7 @@ private static final long serialVersionUID = -7558166539389234332L;
 		}
 
 		// Creamos el objeto de cliente (modelo)
-		Client cliente = new Client(idCliente, nombre, apellido, email, telefono, saldo);
+		Client cliente = new Client(idCliente, nombre, nif, apellido, email, telefono, saldo);
 
 		// Modificar el objeto en la base de datos
 		int registrosModificados = new ClientDao().update(cliente);

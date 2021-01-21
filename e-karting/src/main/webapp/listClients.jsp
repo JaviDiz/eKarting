@@ -16,6 +16,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
+                                <th>Nif</th>
                                 <th>Saldo</th>
                                 <th></th>
                             </tr>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td>${status.count}</td>
                                     <td>${cliente.name} ${cliente.surname}</td>
+                                    <td>${cliente.nif}</td>
                                     <td> <fmt:formatNumber value="${cliente.balance}" type="currency" currencySymbol="€"/></td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}/client?action=edit&idClient=${cliente.id}"

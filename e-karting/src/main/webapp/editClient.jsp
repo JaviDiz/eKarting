@@ -56,6 +56,10 @@
                                         <input type="text" class="form-control" name="nombre" required value="${cliente.name}">
                                     </div>
                                     <div class="form-group">
+                                        <label for="nombre">Nif</label>
+                                        <input type="text" class="form-control" name="nif" required value="${cliente.nif}">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="apellido">Apellido</label>
                                         <input type="text" class="form-control" name="apellido" required value="${cliente.surname}">
                                     </div>
