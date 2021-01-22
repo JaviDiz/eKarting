@@ -174,5 +174,41 @@ public class ClientDao {
 		}
 		return rows;
 	}
+	
+	public List<Client> getListClientPremium() {
+		String SQL_SELECT = "SELECT cli_id, cli_name, cli_nif, cli_surname, cli_email, cli_phone, cli_balance " + " FROM client WHERE cli_balance >=3000";
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Client client = null;
+		List<Client> clients = new ArrayList<>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			stmt = conn.prepareStatement(SQL_SELECT);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("cli_id");
+				String name = rs.getString("cli_name");
+				String nif = rs.getString("cli_nif");
+				String surname = rs.getString("cli_surname");
+				String email = rs.getString("cli_email");
+				String phone = rs.getString("cli_phone");
+				double balance = rs.getDouble("cli_balance");
+
+				client = new Client(id, name, nif, surname, email, phone, balance);
+				clients.add(client);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace(System.out);
+		} finally {
+			DBConnection.close(rs);
+			DBConnection.close(stmt);
+			DBConnection.close(conn);
+		}
+		return clients;
+	}
 
 }
+
+

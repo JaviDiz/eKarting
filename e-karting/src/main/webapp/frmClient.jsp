@@ -47,6 +47,11 @@
 		                    <i class="fas fa-eye"></i> Ver Clientes
 		                </a>
 		            </div>
+		            <div class="col-md-3">
+		                <a href="${pageContext.request.contextPath}/client?action=premium" class="btn btn-primary btn-block">
+		                    <i class="fas fa-eye"></i> Ver Clientes Premium
+		                </a>
+		            </div>
 		        </div>
 		    </div>
 		</section>

@@ -27,6 +27,9 @@ private static final long serialVersionUID = -7558166539389234332L;
 			case "edit":
 				this.editClient(request, response);
 				break;
+			case "premium":
+				this.showListClientPremium(request, response);
+				break;
 			default:
 				this.showListClient(request, response);
 			}
@@ -61,6 +64,21 @@ private static final long serialVersionUID = -7558166539389234332L;
 
 	private void showListClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Client> clientes = new ClientDao().listar();
+
+		System.out.println("clientes = " + clientes);
+		
+		// Dades a desar a la sessió de la classe
+		HttpSession session = request.getSession();
+		session.setAttribute("clientes", clientes);
+		session.setAttribute("totalClientes", clientes.size());
+		session.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
+
+		// request.getRequestDispatcher("frmClient.jsp").forward(request, response);
+		response.sendRedirect("frmClient.jsp");
+	}
+	
+	private void showListClientPremium(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Client> clientes = new ClientDao().getListClientPremium();
 
 		System.out.println("clientes = " + clientes);
 		
